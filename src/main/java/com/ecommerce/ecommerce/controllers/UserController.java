@@ -31,6 +31,13 @@ public class UserController {
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    // Leer un usuario por Email/Username
+    @GetMapping("/username/{username}")
+    public ResponseEntity<User> getUserByUserName(@PathVariable String username) {
+        Optional<User> user = userService.getUserByUserName(username);
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     // Leer todos los usuarios
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {

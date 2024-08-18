@@ -40,6 +40,7 @@ public class AuthService {
             .password(passwordEncoder.encode(request.getPassword()))
             .name(request.getName())
             .role(Role.USER)
+            .state(true)
             .build();
 
         userRepository.save(user);
