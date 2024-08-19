@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 public class Buys {
@@ -20,10 +22,12 @@ public class Buys {
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp createDate;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    // @JsonIgnore
     @ManyToMany
     @JoinTable(
         name = "buys_products",

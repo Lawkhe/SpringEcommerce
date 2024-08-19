@@ -1,6 +1,7 @@
 package com.ecommerce.ecommerce.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import com.ecommerce.ecommerce.models.Discount;
 import com.ecommerce.ecommerce.service.DiscountService;
 
 import java.util.List;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/discounts")
@@ -27,6 +29,13 @@ public class DiscountController {
         return discountService.getDiscountById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+    }
+
+    @GetMapping("/for-date")
+    public ResponseEntity<List<Discount>> getDiscountsForDate(
+            @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+        List<Discount> discounts = discountService.getDiscountsForDate(date);
+        return ResponseEntity.ok(discounts);
     }
 
     @PostMapping

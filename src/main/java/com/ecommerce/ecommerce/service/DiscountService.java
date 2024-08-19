@@ -7,6 +7,7 @@ import com.ecommerce.ecommerce.models.Discount;
 import com.ecommerce.ecommerce.repository.DiscountRepository;
 
 import java.util.List;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -21,6 +22,10 @@ public class DiscountService {
 
     public Optional<Discount> getDiscountById(Long id) {
         return discountRepository.findById(id);
+    }
+
+    public List<Discount> getDiscountsForDate(Date date) {
+        return discountRepository.findDiscountsForDate(date);
     }
 
     public Discount createDiscount(Discount discount) {
